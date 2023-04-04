@@ -24,5 +24,7 @@ app.use('/users', usersRouter);
 
 //rotas
 const custumerRouter = require('./routes/customers');
+const saleRouter = require('./routes/sales');
 app.use('/customers', custumerRouter)
+app.use('/sales', saleRouter)
 module.exports = app;
