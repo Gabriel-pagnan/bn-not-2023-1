@@ -1,11 +1,11 @@
-const Customer = require('../models/Supplier');
+const Supplier = require('../models/Supplier');
 
 const controller = {}
 
 controller.create = async (req, res) => {
     try {
         //manda as informações que vieram em req.body para serem gravadas no banco de dados
-       await Customer.create(req.body);
+       await Supplier.create(req.body);
         
         //HTTP 201: created
         res.status(201).end()
@@ -18,7 +18,7 @@ controller.create = async (req, res) => {
 
 controller.retrieveAll = async(req, res) => {
     try {
-        const result = await Customer.find()
+        const result = await Supplier.find()
         res.send(result)
     } catch (error) {
         console.error(error);
@@ -28,7 +28,7 @@ controller.retrieveAll = async(req, res) => {
 
 controller.retriveOne = async(req, res) => {
     try {
-        const result = await Customer.findById(req.params.id);
+        const result = await Supplier.findById(req.params.id);
         if(result){
             res.send(result)
         }else{
@@ -42,7 +42,7 @@ controller.retriveOne = async(req, res) => {
 
 controller.updateOne = async(req, res) => {
     try {
-        const result = await Customer.findByIdAndUpdate(req.params.id, req.body);
+        const result = await Supplier.findByIdAndUpdate(req.params.id, req.body);
         if(result){
             res.send(result)
         }else{
@@ -55,7 +55,7 @@ controller.updateOne = async(req, res) => {
 }
 controller.delete = async(req, res) => {
     try {
-        const result = await Customer.findByIdAndDelete({_id: req.params.id});
+        const result = await Supplier.findByIdAndDelete({_id: req.params.id});
         res.send(result)
     } catch (error) {
         console.error(error);
