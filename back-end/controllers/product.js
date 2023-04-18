@@ -1,11 +1,11 @@
-const Sale = require('../models/Sale');
+const Products = require('../models/Product');
 
 const controller = {}
 
 controller.create = async (req, res) => {
     try {
         //manda as informações que vieram em req.body para serem gravadas no banco de dados
-       await Sale.create(req.body);
+       await Products.create(req.body);
         
         //HTTP 201: created
         res.status(201).end()
@@ -18,7 +18,7 @@ controller.create = async (req, res) => {
 
 controller.retrieveAll = async(req, res) => {
     try {
-        const result = await Sale.find().populate('customer').populate('items.product')
+        const result = await Products.find().populate('supplier')
         res.send(result)
     } catch (error) {
         console.error(error);
@@ -28,7 +28,7 @@ controller.retrieveAll = async(req, res) => {
 
 controller.retriveOne = async(req, res) => {
     try {
-        const result = await Sale.findById(req.params.id).populate('customer').populate('items.product');
+        const result = await Products.findById(req.params.id).populate('supplier');
         if(result){
             res.send(result)
         }else{
@@ -42,7 +42,7 @@ controller.retriveOne = async(req, res) => {
 
 controller.updateOne = async(req, res) => {
     try {
-        const result = await Sale.findByIdAndUpdate(req.params.id, req.body);
+        const result = await Products.findByIdAndUpdate(req.params.id, req.body);
         if(result){
             res.send(result)
         }else{
@@ -55,7 +55,7 @@ controller.updateOne = async(req, res) => {
 }
 controller.delete = async(req, res) => {
     try {
-        const result = await Sale.findByIdAndDelete({_id: req.params.id});
+        const result = await Products.findByIdAndDelete({_id: req.params.id});
         res.send(result)
     } catch (error) {
         console.error(error);

@@ -1,4 +1,4 @@
-const Customer = require('../models/Supplier');
+const Customer = require('../models/Customer');
 
 const controller = {}
 

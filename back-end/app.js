@@ -26,8 +26,10 @@ app.use('/users', usersRouter);
 const custumerRouter = require('./routes/customers');
 const saleRouter = require('./routes/sales');
 const suppliersRouter = require('./routes/suppliers');
+const productsRouter = require('./routes/products');
 
 app.use('/customers', custumerRouter)
 app.use('/sales', saleRouter)
 app.use('/suppliers', suppliersRouter)
+app.use('/products', productsRouter)
 module.exports = app;
