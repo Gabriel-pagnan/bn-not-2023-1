@@ -1,5 +1,6 @@
 const Customer = require('../models/Customer');
-
+const qpm = require('query-params-mongo')
+const processQuery = qpm()
 const controller = {}
 
 controller.create = async (req, res) => {
@@ -18,8 +19,15 @@ controller.create = async (req, res) => {
 
 controller.retrieveAll = async(req, res) => {
     try {
-        const result = await Customer.find()
+        let filter = {}
+        if(Object.keys(req.query).length > 0) {
+            const query = processQuery(req.query, {}, false)
+            filter = query.filter
+        }
+        
+        const result = await Customer.find(filter)
         res.send(result)
+        
     } catch (error) {
         console.error(error);
         res.status(500).send(error)
